@@ -5,6 +5,7 @@ import {
   Text,
   View,
   TouchableOpacity,
+  Dimensions
 } from 'react-native';
 
 const math = require("mathjs");
@@ -16,8 +17,17 @@ class App extends Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			result: ''
+			result: '',
+			landscape: true
 		}
+    Dimensions.addEventListener('change', ({window:{width,height}})=>{
+			if (width<height) 
+				this.setState({landscape: false});
+ 		 	else 
+				this.setState({landscape: true});
+			
+    });
+		
 	}
 
 	
@@ -65,7 +75,9 @@ class App extends Component{
 				borderColor: '#484848',
 				backgroundColor: '#585858',
 				justifyContent: "center",
-				alignItems: "center"
+				alignItems: "center",
+				flexDirection: "row"
+				
 			},
 			textBox: {
 				flex: 2,
@@ -100,6 +112,10 @@ class App extends Component{
 			},
 			buttonAlt:{
 				backgroundColor: '#428df5'
+			},
+			landscapePanel: {
+				flex: 2,
+				flexDirection: 'column'
 			}
 		 	
 		 });
@@ -227,6 +243,84 @@ class App extends Component{
 									+
 								</Text>
 							</TouchableOpacity>
+					</View>
+					<View style={[styles.landscapePanel, {display: this.state.landscape ? 'flex' : 'none'}]}>
+						<View style= {styles.rowContainer}>
+							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
+								onPress={() => this.setState({result: 'sqrt('+this.state.result+')'})}>
+								<Text style={styles.buttonText}>
+								  √
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
+								onPress={() => this.setState({result: '('+this.state.result+')!'})}>
+								<Text style={styles.buttonText}>
+									x!
+								</Text>
+							</TouchableOpacity>
+						</View>
+						<View style= {styles.rowContainer}>
+							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
+								onPress={() => this.setState({result: 'exp('+this.state.result+')'})}>
+								<Text style={styles.buttonText}>
+									e
+								</Text>
+								<Text style={{fontSize: 20, lineHeight: 18, color: 'white'}}>
+								x
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
+								onPress={() => this.setState({result: 'pow(10,'+this.state.result+')'})}>
+								<Text style={{fontSize: 30, lineHeight: 60, color: 'white'}}>
+									10
+								</Text>
+								<Text style={{fontSize: 20, lineHeight: 15, color: 'white'}}>
+									x
+								</Text>
+							</TouchableOpacity>
+						</View>
+						<View style= {styles.rowContainer}>
+							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
+								onPress={() => addToResult('')}>
+								<Text style={styles.buttonText}>
+									
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
+								onPress={() => addToResult('')}>
+								<Text style={styles.buttonText}>
+									
+								</Text>
+							</TouchableOpacity>
+						</View>
+						<View style= {styles.rowContainer}>
+							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
+								onPress={() => addToResult('')}>
+								<Text style={styles.buttonText}>
+									
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
+								onPress={() => addToResult('')}>
+								<Text style={styles.buttonText}>
+									
+								</Text>
+							</TouchableOpacity>
+						</View>
+						<View style= {styles.rowContainer}>
+							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}	
+								onPress={() => addToResult('')}>
+								<Text style={styles.buttonText}>
+									
+								</Text>
+							</TouchableOpacity>
+							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
+								onPress={() => addToResult('')}>
+								<Text style={styles.buttonText}>
+									
+								</Text>
+							</TouchableOpacity>
+						</View>
 					</View>
 				</View>
 			</View>

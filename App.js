@@ -18,16 +18,14 @@ class App extends Component{
 		super(props);
 		this.state = {
 			result: '',
-			landscape: true
+			landscape: false,
 		}
     Dimensions.addEventListener('change', ({window:{width,height}})=>{
 			if (width<height) 
 				this.setState({landscape: false});
  		 	else 
 				this.setState({landscape: true});
-			
     });
-		
 	}
 
 	
@@ -44,16 +42,16 @@ class App extends Component{
 		}
 
 		const calculate = () => {
-		try{
+			try{
 				let value = math.evaluate(this.state.result);
 				if(!isNaN(value))
 					this.setState({result: value});
 				else
 					this.setState({result: 'Error'});
-		}
-		catch(error){
-			this.setState({result: 'Error'});
-		}
+			}
+			catch(error){
+				this.setState({result: 'Error'});
+			}
 
 			
 		}
@@ -281,43 +279,52 @@ class App extends Component{
 						</View>
 						<View style= {styles.rowContainer}>
 							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
-								onPress={() => addToResult('')}>
+								onPress={() => this.setState({result: 'log('+this.state.result+')'})}>
 								<Text style={styles.buttonText}>
-									
+									ln
 								</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
-								onPress={() => addToResult('')}>
-								<Text style={styles.buttonText}>
-									
+								onPress={() => this.setState({result: 'log10('+this.state.result+')'})}>
+								<Text style={{fontSize: 30, lineHeight: 30, color: 'white'}}>
+									log
+								</Text>
+								<Text style={{fontSize: 20, lineHeight: 70, color: 'white'}}>
+									10
 								</Text>
 							</TouchableOpacity>
 						</View>
 						<View style= {styles.rowContainer}>
 							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
-								onPress={() => addToResult('')}>
+								onPress={() => addToResult(math.e)}>
 								<Text style={styles.buttonText}>
-									
+									e
 								</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
-								onPress={() => addToResult('')}>
-								<Text style={styles.buttonText}>
-									
+								onPress={() => this.setState({result: '('+this.state.result+')^2'})}>
+								<Text style={{fontSize: 30, lineHeight: 60, color: 'white'}}>
+									x
+								</Text>
+								<Text style={{fontSize: 20, lineHeight: 20, color: 'white'}}>
+									2
 								</Text>
 							</TouchableOpacity>
 						</View>
 						<View style= {styles.rowContainer}>
 							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}	
-								onPress={() => addToResult('')}>
+								onPress={() => addToResult(math.pi)}>
 								<Text style={styles.buttonText}>
-									
+									π
 								</Text>
 							</TouchableOpacity>
 							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
-								onPress={() => addToResult('')}>
-								<Text style={styles.buttonText}>
-									
+								onPress={() => this.setState({result: '('+this.state.result+')^3'})}>
+								<Text style={{fontSize: 30, lineHeight: 60, color: 'white'}}>
+									x
+								</Text>
+								<Text style={{fontSize: 20, lineHeight: 20, color: 'white'}}>
+									3
 								</Text>
 							</TouchableOpacity>
 						</View>

@@ -44,9 +44,9 @@ class App extends Component{
 		const calculate = () => {
 			try{
 				let value = math.evaluate(this.state.result);
-				if(!isNaN(value))
-					this.setState({result: value});
-				else
+				if(!isNaN(value) && value != Infinity)
+					this.setState({result: math.round(value, 4)});
+				else 
 					this.setState({result: 'Error'});
 			}
 			catch(error){
@@ -296,7 +296,7 @@ class App extends Component{
 						</View>
 						<View style= {styles.rowContainer}>
 							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}
-								onPress={() => addToResult(math.e)}>
+								onPress={() => addToResult(math.round(math.e, 4))}>
 								<Text style={styles.buttonText}>
 									e
 								</Text>
@@ -313,7 +313,7 @@ class App extends Component{
 						</View>
 						<View style= {styles.rowContainer}>
 							<TouchableOpacity style = {[styles.button, styles.buttonAlt]}	
-								onPress={() => addToResult(math.pi)}>
+								onPress={() => addToResult(math.round(math.pi, 4))}>
 								<Text style={styles.buttonText}>
 									π
 								</Text>
